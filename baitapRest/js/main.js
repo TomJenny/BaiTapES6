@@ -1,7 +1,7 @@
-let getELE = id => document.querySelector(id);
+// GLOBAL
+const getELE = id => document.querySelector(id);
 
-
-
+// calculate the total score
 const sum = (...sumArray) => {
     let sum = 0;
     sumArray.forEach(Diem => {
@@ -17,6 +17,7 @@ getELE("#btnKhoi1").addEventListener("click", function () {
     let diemHoa = parseFloat(getELE("#inpHoa").value);
 
     let tongDiem = sum(diemToan, diemHoa, diemLy).toFixed(2);
+
     getELE("#tbKhoi1").innerHTML = tongDiem;
 });
 

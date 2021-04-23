@@ -1,19 +1,19 @@
+//GLOBAL
 const colorList = ["pallet", "viridian", "pewter", "cerulean", "vermillion", "lavender", "celadon", "saffron", "fuschia", "cinnabar"];
-const colorListLength = colorList.length;
 
 const getELE = id => document.querySelector(id);
 
 const getArrayELE = id => document.querySelectorAll(id);
 
-const getClassELE = (id, className) => document.querySelector(id).classList.contains(className);
-
-const renderButtonColor = () => {
+// show button color on website
+const renderButtonColor = (defaultActive) => {
     let content = '';
-    colorList.map((item, index) => {
-        if (index == 0) {
-            content += `<button class="color-button ${item} active"></button>`;
+    colorList.map((item) => {
+        if (item == defaultActive) {
+            content += `<button class="color-button ${item} active" onclick="changeColorHouse('${item}')"></button>`;
+            getELE("#house").className = `house ${item}`;
         } else {
-            content += `<button class="color-button ${item}"></button>`;
+            content += `<button class="color-button ${item}" onclick="changeColorHouse('${item}')"></button>`;
 
         }
     });
@@ -22,34 +22,18 @@ const renderButtonColor = () => {
 
 };
 
-renderButtonColor();
+renderButtonColor("pallet");
 
+// change color of house
+const changeColorHouse = (color) => {
 
-const changeColorHouse = () => {
+    getELE("#house").className = `house ${color}`;
 
     getArrayELE(".color-button").forEach(ele => {
-
-        ele.addEventListener("click", function () {
-
-            let color = colorList.filter((color) => {
-                if (this.classList.contains(color)) {
-                    return color;
-                }
-            });
-
-            if (!getELE("#house").classList.contains(color)) {
-
-                getArrayELE(".color-button").forEach(ele => {
-                    ele.classList.remove("active");
-                });
-
-                ele.classList.add("active");
-
-                getELE("#house").className = `house ${color}`;
-            }
-        });
-
+        if (ele.classList.contains(color)) {
+            ele.classList.add("active");
+        } else {
+            ele.classList.remove("active");
+        }
     });
 };
-
-changeColorHouse();
